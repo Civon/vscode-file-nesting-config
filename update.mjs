@@ -269,6 +269,10 @@ function stringify(items) {
   return Array.from(new Set(items)).sort().join(', ')
 }
 
+function capitalize(items) {
+  return Array.from(new Set(items)).sort().map(item => item.toUpperCase()).map(item => item.replace(/.MD$/, '.md'))
+}
+
 function sortObject(obj) {
   return Object.keys(obj).sort().reduce((acc, key) => {
     acc[key] = obj[key]
@@ -284,6 +288,7 @@ const full = sortObject({
   'rush.json': stringify(packageJSON),
   'pubspec.yaml': stringify(pubspecYAML),
   'readme.*': stringify(readme),
+  'README.*': stringify(capitalize(readme)),
   'cargo.toml': stringify(cargo),
   'gemfile': stringify(gemfile),
   'go.mod': stringify(gofile),
